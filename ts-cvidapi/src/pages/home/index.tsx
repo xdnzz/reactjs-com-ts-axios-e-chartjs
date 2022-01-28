@@ -9,13 +9,12 @@ export default function Home(){
 
 const [data, setData] = useState<ResponseData | undefined>(undefined)
 
-
    useEffect(()=>{  
-        const dados = async function getItem(){
+        async function getItem(){
         const retorno:void | ResponseData = await axios.get('https://api.covid19api.com/summary')
         .then (res => setData(res.data))
     }
-        dados();
+    getItem();
    },[])
 
    console.log(data?.Countries)
@@ -33,7 +32,7 @@ const [data, setData] = useState<ResponseData | undefined>(undefined)
                 </>
             )
              
-             : 'Carregando'}
+             : 'Carregando...'}
 
             
         </div>
