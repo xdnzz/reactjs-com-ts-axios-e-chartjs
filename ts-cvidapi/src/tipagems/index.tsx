@@ -1,6 +1,8 @@
 export type Country = {
     updated: number;
     Country: string;
+    NewConfirmed: number;
+    NewRecovered: number;
     ID: string;
     countryInfo: {
         "_id": number;

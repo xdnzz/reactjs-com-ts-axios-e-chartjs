@@ -1,3 +1,5 @@
+import * as C from '../pages/home/style';
+
 import {Country} from '../tipagems/index'
 
 
@@ -6,10 +8,16 @@ import {Country} from '../tipagems/index'
     }
 
 export default function CountryList({countries}:Iprops){
-    return <ul>
+    return <C.Wrapper>
                {countries.map((country)=>(
-                   <li key={country.ID}>{country.Country}</li>
+                   <C.LiWrapper key={country.ID}>
+                       <C.Card>
+                           <h4>{country.Country}</h4>
+                           <div>Novos casos:{country.NewConfirmed}</div>
+                           <div>Recuperados:{country.NewRecovered}</div>
+                        </C.Card>
+                       </C.LiWrapper>
                ))}
-            </ul>
+            </C.Wrapper>
     
 }
