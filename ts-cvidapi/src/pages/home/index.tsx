@@ -2,12 +2,13 @@ import axios from 'axios';
 import {useState, useEffect} from 'react';
 import CountryList from '../../components/CountryList';
 import GlobalData from '../../components/GlobalData';
-import {ResponseData} from '../../tipagems/index'
+import {Country, ResponseData} from '../../tipagems/index';
 
 
 export default function Home(){
 
-const [data, setData] = useState<ResponseData | undefined>(undefined)
+const [data, setData] = useState<ResponseData | undefined>(undefined);
+const [paisAtivo, setPaisAtivo] = useState<Country[]>([]);
 
    useEffect(()=>{  
         async function getItem(){
@@ -19,8 +20,24 @@ const [data, setData] = useState<ResponseData | undefined>(undefined)
 
    console.log(data?.Countries)
 
+
+   const handlePais = (country:Country) => {
+    const indexPais = paisAtivo.findIndex((paisAtivo)=>paisAtivo.ID === country.ID);
+    if(indexPais > -1) {
+        const newPaisAtivo = [...paisAtivo];
+        newPaisAtivo.splice(indexPais,1);
+
+        setPaisAtivo(newPaisAtivo);
+
+    } else {
+        setPaisAtivo([...paisAtivo, country])
+    }
+   }
+
     return (
         <div>
+            {paisAtivo.map((APais)=> 
+            <span>{APais.Country}</span>)}
             {data ? (
                 <>
                 <GlobalData
@@ -28,7 +45,7 @@ const [data, setData] = useState<ResponseData | undefined>(undefined)
                 novasMortes={data?.Global.NewDeaths}
                 novosRecuperados={data?.Global.NewRecovered}
                 /> 
-                <CountryList countries={data.Countries}/>
+                <CountryList countries={data.Countries} onItemClick={handlePais}/>
                 </>
             )
              

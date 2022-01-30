@@ -23,4 +23,13 @@ export const Card = styled.div`
 background-color: #444040;
 margin: 1px;
 padding: 10px 0;
+cursor: pointer;
+`;
+
+export const Container = styled.div`
+display: flex;
+flex-direction:column;
+justify-content: center;
+align-items: center;
+margin: 10px;
 `;
