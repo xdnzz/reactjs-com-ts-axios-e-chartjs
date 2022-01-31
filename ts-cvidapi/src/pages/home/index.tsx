@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {useState, useEffect} from 'react';
+import BarChart from '../../components/BarChart';
 import CountryList from '../../components/CountryList';
 import GlobalData from '../../components/GlobalData';
 import {Country, ResponseData} from '../../tipagems/index';
@@ -18,7 +19,7 @@ const [paisAtivo, setPaisAtivo] = useState<Country[]>([]);
     getItem();
    },[])
 
-   console.log(data?.Countries)
+
 
 
    const handlePais = (country:Country) => {
@@ -35,9 +36,8 @@ const [paisAtivo, setPaisAtivo] = useState<Country[]>([]);
    }
 
     return (
-        <div>
-            {paisAtivo.map((APais)=> 
-            <span>{APais.Country}</span>)}
+        <div style={{color:'#413d3d'}}>
+            
             {data ? (
                 <>
                 <GlobalData
@@ -45,6 +45,7 @@ const [paisAtivo, setPaisAtivo] = useState<Country[]>([]);
                 novasMortes={data?.Global.NewDeaths}
                 novosRecuperados={data?.Global.NewRecovered}
                 /> 
+                {paisAtivo.length ? <BarChart countries={paisAtivo}/> : null}
                 <CountryList countries={data.Countries} onItemClick={handlePais}/>
                 </>
             )

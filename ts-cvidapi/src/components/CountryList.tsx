@@ -1,6 +1,7 @@
 import * as C from '../pages/home/style';
 
 import {Country} from '../tipagems/index'
+import CountryItem from './CountryItem';
 
 
     type Iprops ={
@@ -10,14 +11,10 @@ import {Country} from '../tipagems/index'
 
 export default function CountryList({countries, onItemClick}:Iprops){
     return <C.Wrapper>
-               {countries.map((country)=>(
-                   <C.LiWrapper key={country.ID} onClick={()=>onItemClick(country)}>
-                       <C.Card>
-                           <h4>{country.Country}</h4>
-                           <div>Novos casos:{country.NewConfirmed}</div>
-                           <div>Recuperados:{country.NewRecovered}</div>
-                        </C.Card>
-                       </C.LiWrapper>
+               {countries.map((pais)=>(
+                <CountryItem pais={pais}
+                onItemClick={onItemClick}    
+                /> 
                ))}
             </C.Wrapper>
     
